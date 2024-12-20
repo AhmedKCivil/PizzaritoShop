@@ -63,9 +63,6 @@ namespace PizzaritoShop.Pages.Cart
 
             TotalPrice = Cart.Sum(item => item.PizzaPrice * item.Quantity);
 
-            // Pass the cart count to the view (to display the cart count in the layout)
-            ViewData["CartCount"] = Cart.Sum(item => item.Quantity);
-
         }
 
         public IActionResult OnPostAddToCart(int pizzaId, string pizzaName, double pizzaPrice)

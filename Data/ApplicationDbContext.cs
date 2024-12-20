@@ -8,15 +8,11 @@ namespace PizzaritoShop.Data
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
-        //public DbSet<PizzaOrder> PizzaOrders { get; set; }
         public DbSet<PizzasModel> Pizzas { get; set; }
-        public DbSet<PizzaOrder> PizzaOrder { get; set; }
         public DbSet<OrderListModel> OrdersTable { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
         : base(options)
-
         {
 
         }

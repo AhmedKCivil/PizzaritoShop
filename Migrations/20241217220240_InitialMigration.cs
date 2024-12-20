@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PizzaritoShop.Migrations
 {
     /// <inheritdoc />
-    public partial class UserDatabase : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,6 +48,57 @@ namespace PizzaritoShop.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrdersTable",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PizzaName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalPrice = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrdersTable", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PizzaOrder",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PizzaName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PizzaPrice = table.Column<double>(type: "float", nullable: false),
+                    TotalPrice = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PizzaOrder", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pizzas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PizzaName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageTitle = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pizzas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +207,40 @@ namespace PizzaritoShop.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CartItems",
+                columns: table => new
+                {
+                    CartItemId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PizzaId = table.Column<int>(type: "int", nullable: false),
+                    PizzaName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    PizzaPrice = table.Column<double>(type: "float", nullable: false),
+                    ImageTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderListModelId = table.Column<int>(type: "int", nullable: false),
+                    StuffedCrust = table.Column<bool>(type: "bit", nullable: false),
+                    ThinCrispy = table.Column<bool>(type: "bit", nullable: false),
+                    Chicken = table.Column<bool>(type: "bit", nullable: false),
+                    Pepperoni = table.Column<bool>(type: "bit", nullable: false),
+                    PizzaOrderId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartItems", x => x.CartItemId);
+                    table.ForeignKey(
+                        name: "FK_CartItems_OrdersTable_OrderListModelId",
+                        column: x => x.OrderListModelId,
+                        principalTable: "OrdersTable",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartItems_PizzaOrder_PizzaOrderId",
+                        column: x => x.PizzaOrderId,
+                        principalTable: "PizzaOrder",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -194,6 +279,16 @@ namespace PizzaritoShop.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItems_OrderListModelId",
+                table: "CartItems",
+                column: "OrderListModelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItems_PizzaOrderId",
+                table: "CartItems",
+                column: "PizzaOrderId");
         }
 
         /// <inheritdoc />
@@ -215,10 +310,22 @@ namespace PizzaritoShop.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "CartItems");
+
+            migrationBuilder.DropTable(
+                name: "Pizzas");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "OrdersTable");
+
+            migrationBuilder.DropTable(
+                name: "PizzaOrder");
         }
     }
 }

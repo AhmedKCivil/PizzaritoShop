@@ -48,9 +48,7 @@ namespace PizzaritoShop.Pages.Pizzas
                 ModelState.AddModelError(string.Empty, ex.Message);
                 return Page();
             }
-            
         }
-
 
     }
 }

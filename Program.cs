@@ -1,10 +1,10 @@
 using PizzaritoShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Stripe;
 using PizzaritoShop.Data.Services.Base;
 using PizzaritoShop.Model;
 using PizzaritoShop.Data.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,15 +31,10 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-
 // Add services to the container, including Razor Pages and Memory Cache
 builder.Services.AddRazorPages();
 builder.Services.AddMemoryCache();
 builder.Services.AddDistributedMemoryCache();
-
-// Configure Stripe settings
-builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
-
 builder.Services.AddHttpClient(); //newly added for API
 
 var app = builder.Build();
@@ -50,9 +45,6 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
-
-// Set the Stripe API Key from configuration
-StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
 app.UseSession();           // Enable session handling
 app.UseHttpsRedirection();  // Redirect HTTP requests to HTTPS
@@ -87,9 +79,7 @@ using (var scope = app.Services.CreateScope())
     {
         if (!await roleManager.RoleExistsAsync(role))
              await roleManager.CreateAsync(new IdentityRole(role));
-
     }
-
 }
 
 using (var scope = app.Services.CreateScope())

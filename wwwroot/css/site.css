@@ -102,3 +102,21 @@ body {
         transform: scale(1);
     }
 }
+
+
+
+.nav-link:hover {
+    background-color: #28a745; /* Green background */
+    color: #dc3545; /* Red text color */
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.nav-link:active {
+    background-color: #dc3545; /* Red background */
+    color: #ffffff; /* White text when active */
+}
+
+.text-red {
+    color: #dc3545; /* Red color */
+}

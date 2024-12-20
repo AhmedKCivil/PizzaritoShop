@@ -18,8 +18,8 @@
                     <!-- Pizza Image Section -->
                     <div class="card-body text-center">
                         <img src="@Model.PizzaDetail.ImageTitle" alt="@Model.PizzaDetail.PizzaName" class="img-fluid rounded mb-4 shadow-sm" style="max-height: 400px; object-fit: cover;" />
-@*                         <p class="lead text-muted">@Model.PizzaDetail.Description</p>
- *@                        <h4 class="text-success mb-3">@Model.PizzaDetail.Price.ToString("C")</h4>
+                         <p class="lead text-muted">@Model.PizzaDetail.Description</p>
+                         <h4 class="text-success mb-3">@Model.PizzaDetail.Price.ToString("C")</h4>
                     </div>
 
                     <!-- Button Section -->
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <!-- Return to Menu Button (Outside of the Card) -->
+        <!-- Return to Menu Button -->
         <div class="row justify-content-center mt-4">
             <div class="col-md-10 col-lg-8 text-center">
                 <a href="@Url.Page("/Pizzas/Index")" class="btn btn-info btn-lg w-100">

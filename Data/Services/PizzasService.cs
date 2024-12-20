@@ -86,7 +86,6 @@ namespace PizzaritoShop.Data.Services
                     PizzaName = pizzaName,
                     PizzaPrice = pizzaPrice,
                     Quantity = 1,
-                    ImageTitle = imageTitle
                 };
                 cart.Add(cartItem);
             }

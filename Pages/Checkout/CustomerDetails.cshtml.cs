@@ -41,7 +41,6 @@ namespace PizzaritoShop.Pages.Checkout
         public async Task<IActionResult> OnPost()
         {
             CartItems = HttpContext.Session.GetObject<List<CartItem>>(CartSessionKey) ?? new List<CartItem>();
-
             TotalPrice = CartItems.Sum(item => item.PizzaPrice * item.Quantity);
 
             // Combine all the pizza names into a single string separated by commas.
@@ -49,15 +48,13 @@ namespace PizzaritoShop.Pages.Checkout
 
             var newOrder = new OrderListModel
             {
-                // Set the customer's name and address from the PizzaOrder model
                 CustomerName = PizzaOrder.CustomerName,
                 Address = PizzaOrder.Address,
-                PizzaName = combinedPizzaNames, 
+                PizzaName = combinedPizzaNames,
                 CartItems = CartItems,
                 Quantity = CartItems.Sum(item => item.Quantity),
-                TotalPrice = CartItems.Sum(item => item.PizzaPrice * item.Quantity), 
+                TotalPrice = CartItems.Sum(item => item.PizzaPrice * item.Quantity),
                 CreatedDate = DateTime.Now
-                
             };
 
             _context.OrdersTable.Add(newOrder);
@@ -68,60 +65,7 @@ namespace PizzaritoShop.Pages.Checkout
 
             //return RedirectToPage("/Checkout/Payment", new { OrderId = newOrder.Id, TotalPrice });
 
-
             return RedirectToPage("/Checkout/ThankYou", new { OrderId = newOrder.Id });
         }
-
-
-
-
-
-
-
-
-
-
-        //public async Task<IActionResult> OnPost()
-        //{
-        //    CartItems = HttpContext.Session.GetObject<List<CartItem>>(CartSessionKey) ?? new List<CartItem>();
-
-        //    TotalPrice = CartItems.Sum(item => item.PizzaPrice * item.Quantity);
-
-        //    var combinedPizzaNames = string.Join(", ", CartItems.Select(item => item.PizzaName));
-
-        //    var newOrder = new OrderListModel
-        //    {
-        //        CustomerName = PizzaOrder.CustomerName,
-        //        Address = PizzaOrder.Address,
-        //        PizzaName = combinedPizzaNames,
-        //        CartItems = CartItems,
-        //        Quantity = CartItems.Sum(item => item.Quantity),
-        //        PizzaPrice = PizzaOrder.PizzaPrice,
-        //        TotalPrice = CartItems.Sum(item => item.PizzaPrice * item.Quantity), // Total of all items in the cart
-        //        CreatedDate = DateTime.Now
-        //    };
-
-        //    _context.OrdersTable.Add(newOrder);
-
-        //    await _context.SaveChangesAsync();
-
-        //    TempData["CustomerName"] = PizzaOrder.CustomerName;
-        //    TempData["Address"] = PizzaOrder.Address;
-        //    TempData["TotalPrice"] = TotalPrice.ToString();
-        //    TempData["CartItems"] = Newtonsoft.Json.JsonConvert.SerializeObject(CartItems);
-
-        //    HttpContext.Session.Remove(CartSessionKey);
-
-        //    return RedirectToPage("/Checkout/ThankYou", new
-        //    {
-        //        PizzaOrder.CustomerName,
-        //        PizzaOrder.Address,
-        //        newOrder.TotalPrice
-
-        //    });
-        //}
-
-
-
     }
 }

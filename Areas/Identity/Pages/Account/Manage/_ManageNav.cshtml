@@ -2,14 +2,40 @@
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
-<ul class="nav nav-pills flex-column">
-    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
-    @if (hasExternalLogins)
-    {
-        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
-    }
-    <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
-</ul>
+
+<div class="d-flex flex-column align-items-start bg-light shadow-sm p-4 rounded" style="max-width: 300px;">
+    <h3 class="mb-4 text-primary fw-bold">Account Settings</h3>
+    <ul class="nav flex-column w-100">
+        <!-- Profile Link -->
+        <li class="nav-item mb-3">
+            <a class="nav-link d-flex align-items-center text-red fw-semibold" id="profile" asp-page="./Index" style="text-decoration: none;">
+                <i class="bi bi-person-circle me-3 text-primary" style="font-size: 1.5rem;"></i>
+                <span class="fs-5">Profile</span>
+            </a>
+        </li>
+        <!-- Email Link -->
+        <li class="nav-item mb-3">
+            <a class="nav-link d-flex align-items-center text-red fw-semibold" id="email" asp-page="./Email" style="text-decoration: none;">
+                <i class="bi bi-envelope-fill me-3 text-primary" style="font-size: 1.5rem;"></i>
+                <span class="fs-5">Email</span>
+            </a>
+        </li>
+        <!-- Password Link -->
+        <li class="nav-item mb-3">
+            <a class="nav-link d-flex align-items-center text-red fw-semibold" id="change-password" asp-page="./ChangePassword" style="text-decoration: none;">
+                <i class="bi bi-shield-lock-fill me-3 text-primary" style="font-size: 1.5rem;"></i>
+                <span class="fs-5">Password</span>
+            </a>
+        </li>
+        @if (hasExternalLogins)
+        {
+            <!-- External Logins Link -->
+            <li class="nav-item mb-3">
+                <a class="nav-link d-flex align-items-center text-red fw-semibold" id="external-login" asp-page="./ExternalLogins" style="text-decoration: none;">
+                    <i class="bi bi-key-fill me-3 text-primary" style="font-size: 1.5rem;"></i>
+                    <span class="fs-5">External Logins</span>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

@@ -36,52 +36,6 @@
                     </form>
                 </div>
             </div>
-
-            <!-- Order Summary Section -->
-            <div class="card shadow-sm border-0 rounded-lg mt-5">
-                <div class="card-body text-center">
-                    <h4>Order Summary</h4>
-                    <ul class="list-group mb-4">
-                        @foreach (var item in Model.CartItems)
-                        {
-                            <li class="list-group-item">
-                                @item.PizzaName - @item.Quantity x £@item.PizzaPrice
-                                <br />
-                                <p>Added toppings:</p>
-                                <div>
-                                    @{
-                                        // Create a list to hold the selected toppings
-                                        var selectedToppings = new List<string>();
-
-                                        // Add toppings to the list based on their selection
-                                        if (item.StuffedCrust) { selectedToppings.Add("Stuffed Crust"); }
-                                        if (item.ThinCrispy) { selectedToppings.Add("Thin Crispy"); }
-                                        if (item.Chicken) { selectedToppings.Add("Chicken"); }
-                                        if (item.Pepperoni) { selectedToppings.Add("Pepperoni"); }
-
-                                        // Join the selected toppings with commas and output them
-                                        var toppingsOutput = string.Join(", ", selectedToppings);
-                                    }
-
-                                    <!-- Output the toppings, or show "No toppings" if none are selected -->
-                                    @if (!string.IsNullOrEmpty(toppingsOutput))
-                                    {
-                                        @toppingsOutput
-                                    }
-                                    else
-                                    {
-                                        <span>No toppings</span>
-                                    }
-                                </div>
-                            </li>
-                        }
-
-                    </ul>
-                    <hr />
-                    <p class="text-muted">Total Price: <strong>£@Model.TotalPrice.ToString("0.00")</strong></p>
-                </div>
-            </div>
         </div>
     </div>
 </div>
-

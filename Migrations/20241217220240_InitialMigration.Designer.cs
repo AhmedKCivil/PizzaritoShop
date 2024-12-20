@@ -12,8 +12,8 @@ using PizzaritoShop.Data;
 namespace PizzaritoShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241021222512_UserDatabase")]
-    partial class UserDatabase
+    [Migration("20241217220240_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -255,6 +255,9 @@ namespace PizzaritoShop.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PizzaOrderId")
+                        .HasColumnType("int");
+
                     b.Property<double>("PizzaPrice")
                         .HasColumnType("float");
 
@@ -270,6 +273,8 @@ namespace PizzaritoShop.Migrations
                     b.HasKey("CartItemId");
 
                     b.HasIndex("OrderListModelId");
+
+                    b.HasIndex("PizzaOrderId");
 
                     b.ToTable("CartItems");
                 });
@@ -347,6 +352,10 @@ namespace PizzaritoShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImageTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -422,10 +431,19 @@ namespace PizzaritoShop.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("PizzaritoShop.Model.PizzaOrder", null)
+                        .WithMany("CartItems")
+                        .HasForeignKey("PizzaOrderId");
+
                     b.Navigation("Order");
                 });
 
             modelBuilder.Entity("PizzaritoShop.Model.OrderListModel", b =>
+                {
+                    b.Navigation("CartItems");
+                });
+
+            modelBuilder.Entity("PizzaritoShop.Model.PizzaOrder", b =>
                 {
                     b.Navigation("CartItems");
                 });

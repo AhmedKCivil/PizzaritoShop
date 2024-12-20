@@ -19,7 +19,6 @@ namespace PizzaritoShop.Pages.Checkout
         }
        
         public string CustomerName { get; set; }
-        //public string PizzaNames { get; set; }
         public string Address { get; set; }
         public double TotalPrice { get; set; }
         public List<CartItem> CartItems { get; set; } = new List<CartItem>();
@@ -32,7 +31,15 @@ namespace PizzaritoShop.Pages.Checkout
             var order = await _context.OrdersTable
                 .Include(o => o.CartItems)  // Include the related CartItems
                 .FirstOrDefaultAsync(o => o.Id == OrderId);
-            
+
+            if (order == null)
+            {
+                return NotFound("Order not found. Please ensure the OrderId is correct.");
+            }
+
+            // Debugging: Log details about the order
+            Console.WriteLine($"Order retrieved. Customer Name: {order.CustomerName}, Total Price: {order.TotalPrice}");
+
             CustomerName = order.CustomerName;
             Address = order.Address;
             TotalPrice = order.TotalPrice;
@@ -40,7 +47,6 @@ namespace PizzaritoShop.Pages.Checkout
 
             return Page();
         }
-
 
     }
 }

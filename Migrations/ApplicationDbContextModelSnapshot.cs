@@ -235,10 +235,6 @@ namespace PizzaritoShop.Migrations
                     b.Property<bool>("Chicken")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ImageTitle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("OrderListModelId")
                         .HasColumnType("int");
 
@@ -268,7 +264,7 @@ namespace PizzaritoShop.Migrations
 
                     b.HasIndex("OrderListModelId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItem");
                 });
 
             modelBuilder.Entity("PizzaritoShop.Model.OrderListModel", b =>
@@ -305,37 +301,6 @@ namespace PizzaritoShop.Migrations
                     b.ToTable("OrdersTable");
                 });
 
-            modelBuilder.Entity("PizzaritoShop.Model.PizzaOrder", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PizzaName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("PizzaPrice")
-                        .HasColumnType("float");
-
-                    b.Property<double>("TotalPrice")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PizzaOrder");
-                });
-
             modelBuilder.Entity("PizzaritoShop.Model.PizzasModel", b =>
                 {
                     b.Property<int>("Id")
@@ -343,6 +308,10 @@ namespace PizzaritoShop.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageTitle")
                         .IsRequired()
@@ -354,10 +323,6 @@ namespace PizzaritoShop.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
-
-                    b.Property<string>("StripePriceId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
