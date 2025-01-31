@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using PizzaritoShop.Data;
-using PizzaritoShop.Helpers;
-using PizzaritoShop.Model;
+using Repository.Helpers;
+using Core.Entities.Core_Entities;
+using Core.Entities.Order_Entities;
 
 namespace PizzaritoShop.Pages.Orders
 {
@@ -19,7 +20,7 @@ namespace PizzaritoShop.Pages.Orders
             _context = context;
         }
 
-        public List<OrderListModel> OrderList { get; set; } = new List<OrderListModel>();
+        public List<AllOrders> OrderList { get; set; } = new List<AllOrders>();
         public List<CartItem> CartItems { get; set; }
         public double TotalPrice { get; set; }
 

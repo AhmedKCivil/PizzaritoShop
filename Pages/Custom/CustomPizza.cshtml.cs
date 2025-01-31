@@ -1,12 +1,13 @@
 using Azure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using PizzaritoShop.Model;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
 using static System.Collections.Specialized.BitVector32;
 using System;
 using Microsoft.AspNetCore.Http;
-using PizzaritoShop.Helpers;
+using Repository.Helpers;
+using Core.Entities;
+using Core.Entities.Core_Entities;
 
 namespace PizzaritoShop.Pages.Forms
 {

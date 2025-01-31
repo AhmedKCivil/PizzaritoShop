@@ -1,10 +1,8 @@
 using PizzaritoShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using PizzaritoShop.Data.Services.Base;
-using PizzaritoShop.Model;
 using PizzaritoShop.Data.Services;
-
+using Core.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,7 +43,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
-
+ 
 app.UseSession();           // Enable session handling
 app.UseHttpsRedirection();  // Redirect HTTP requests to HTTPS
 app.UseStaticFiles();       // Serve static files
@@ -98,10 +96,7 @@ using (var scope = app.Services.CreateScope())
         await userManager.CreateAsync(user, password);
 
         await userManager.AddToRoleAsync(user, "Admin");
-
     }
-
-
 }
 
 app.Run();

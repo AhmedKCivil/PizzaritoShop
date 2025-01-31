@@ -1,21 +1,10 @@
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using PizzaritoShop.Data;
-using PizzaritoShop.Model;
-using System.Reflection;
-using PizzaritoShop.Helpers;
-using Microsoft.AspNetCore.Authorization;
-using System.Text.Json;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.Reflection.PortableExecutable;
-using PizzaritoShop.Data.Services.Base;
-using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Repository.Helpers;
 using PizzaritoShop.Data.Services;
+using Core.Entities;
+using Core.Interfaces;
+using Core.Entities.Core_Entities;
 
 namespace PizzaritoShop.Pages.Pizzas
 {
@@ -31,8 +20,8 @@ namespace PizzaritoShop.Pages.Pizzas
             _httpClientFactory = httpClientFactory;
         }
 
-        public List<PizzasModel> Pizzas { get; set; } = new List<PizzasModel>();
-        public PizzasModel PizzaDetail { get; set; } //Property to hold pizza details.
+        public List<Product> Pizzas { get; set; } = new List<Product>();
+        public Product PizzaDetail { get; set; } //Property to hold pizza details.
         
         [BindProperty(SupportsGet = true)]
         public string SearchQuery { get; set; }
@@ -46,7 +35,7 @@ namespace PizzaritoShop.Pages.Pizzas
             // Apply search filter if SearchQuery is provided
             if (!string.IsNullOrEmpty(SearchQuery))
             {
-                Pizzas = Pizzas.Where(p => p.PizzaName.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase)).ToList();
+                Pizzas = Pizzas.Where(p => p.ProductName.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase)).ToList();
             }
 
             // Get the cart count from session

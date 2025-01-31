@@ -1,8 +1,8 @@
+using Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaritoShop.Data;
-using PizzaritoShop.Model;
 
 namespace PizzaritoShop.Pages.Pizzas
 {
@@ -17,7 +17,7 @@ namespace PizzaritoShop.Pages.Pizzas
         }
 
         [BindProperty]
-        public PizzasModel NewPizza { get; set; }
+        public Product NewPizza { get; set; }
 
         public IActionResult OnGet()
         {

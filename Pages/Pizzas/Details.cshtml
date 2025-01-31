@@ -12,12 +12,12 @@
             <div class="col-md-10 col-lg-8">
                 <div class="card shadow-lg border-light rounded-lg">
                     <div class="card-header bg-primary text-white text-center">
-                        <h2 class="display-4">@Model.PizzaDetail.PizzaName</h2>
+                        <h2 class="display-4">@Model.PizzaDetail.ProductName</h2>
                     </div>
 
                     <!-- Pizza Image Section -->
                     <div class="card-body text-center">
-                        <img src="@Model.PizzaDetail.ImageTitle" alt="@Model.PizzaDetail.PizzaName" class="img-fluid rounded mb-4 shadow-sm" style="max-height: 400px; object-fit: cover;" />
+                        <img src="@Model.PizzaDetail.ImageTitle" alt="@Model.PizzaDetail.ProductName" class="img-fluid rounded mb-4 shadow-sm" style="max-height: 400px; object-fit: cover;" />
                          <p class="lead text-muted">@Model.PizzaDetail.Description</p>
                          <h4 class="text-success mb-3">@Model.PizzaDetail.Price.ToString("C")</h4>
                     </div>

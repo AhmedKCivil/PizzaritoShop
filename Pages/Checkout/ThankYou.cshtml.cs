@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using PizzaritoShop.Data;
-using PizzaritoShop.Helpers;
-using PizzaritoShop.Model;
+using Repository.Helpers;
+using Core.Entities.Core_Entities;
 
 namespace PizzaritoShop.Pages.Checkout
 {

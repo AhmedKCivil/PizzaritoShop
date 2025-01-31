@@ -2,11 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json.Linq;
 using PizzaritoShop.Data;
-using PizzaritoShop.Helpers;
-using PizzaritoShop.Model;
+using Repository.Helpers;
 using System.Drawing;
 using System.Linq.Expressions;
 using System.Reflection.Metadata.Ecma335;
+using Core.Entities.Core_Entities;
+using Core.Entities.Order_Entities;
 
 namespace PizzaritoShop.Pages.Checkout
 {
@@ -21,7 +22,7 @@ namespace PizzaritoShop.Pages.Checkout
             _context = context;
         }
 
-        public PizzaOrder PizzaOrder { get; set; }
+        public Order PizzaOrder { get; set; }
         public double TotalPrice { get; set; }
         public List<CartItem> CartItems { get; set; }
 
@@ -46,11 +47,11 @@ namespace PizzaritoShop.Pages.Checkout
             // Combine all the pizza names into a single string separated by commas.
             var combinedPizzaNames = string.Join(", ", CartItems.Select(item => item.PizzaName));  // Combining pizza names
 
-            var newOrder = new OrderListModel
+            var newOrder = new AllOrders
             {
                 CustomerName = PizzaOrder.CustomerName,
                 Address = PizzaOrder.Address,
-                PizzaName = combinedPizzaNames,
+                ProductName = combinedPizzaNames,
                 CartItems = CartItems,
                 Quantity = CartItems.Sum(item => item.Quantity),
                 TotalPrice = CartItems.Sum(item => item.PizzaPrice * item.Quantity),

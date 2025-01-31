@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using PizzaritoShop.Model;
-using PizzaritoShop.Helpers;
+using Repository.Helpers;
 using PizzaritoShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Components.Web;
 using System.Reflection.PortableExecutable;
 using Microsoft.Identity.Client;
+using Core.Entities;
+using Core.Entities.Core_Entities;
 
 namespace PizzaritoShop.Pages.Cart
 {
@@ -24,7 +25,7 @@ namespace PizzaritoShop.Pages.Cart
 
         public List<CartItem> Cart { get; set; }
         public double TotalPrice { get; set; }
-        public List<PizzasModel> myPizzas { get; set; } = new List<PizzasModel>();
+        public List<Product> myPizzas { get; set; } = new List<Product>();
 
         public void OnGet()
         {

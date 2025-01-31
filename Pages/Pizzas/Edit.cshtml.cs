@@ -1,11 +1,8 @@
+using Core.Entities;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using PizzaritoShop.Data;
 using PizzaritoShop.Data.Services;
-using PizzaritoShop.Data.Services.Base;
-using PizzaritoShop.Model;
-using SQLitePCL;
 
 namespace PizzaritoShop.Pages.Pizzas
 {
@@ -18,7 +15,7 @@ namespace PizzaritoShop.Pages.Pizzas
         }
 
         [BindProperty]
-        public PizzasModel PizzaDetail { get; set; } //Property to hold pizza details.
+        public Product PizzaDetail { get; set; } //Property to hold pizza details.
 
         public async Task<IActionResult> OnGetAsync(int id)
         {

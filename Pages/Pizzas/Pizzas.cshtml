@@ -32,18 +32,18 @@
                     <div class="card shadow-sm">
                         <!-- Link wrapped around the pizza image to navigate to the details page -->
                         <a asp-page="/Pizzas/Details" asp-route-id="@pizza.Id">
-                            <img src="@pizza.ImageTitle" alt="@pizza.PizzaName" class="card-img-top" style="width:100%; height:auto;" />
+                            <img src="@pizza.ImageTitle" alt="@pizza.ProductName" class="card-img-top" style="width:100%; height:auto;" />
                         </a>
 
                         <div class="card-body text-center">
-                            <h5 class="card-title">@pizza.PizzaName</h5>
+                            <h5 class="card-title">@pizza.ProductName</h5>
                             <p>Price: @pizza.Price.ToString("C")</p>
 
                             <!-- Form to add pizza to cart -->
                             <form method="post" class="pizza-form">
                                 <input type="hidden" name="pizzaId" value="@pizza.Id" /> 
                                 <input type="hidden" name="imageTitle" value="@pizza.ImageTitle" />
-                                <input type="hidden" name="pizzaName" value="@pizza.PizzaName" />
+                                <input type="hidden" name="pizzaName" value="@pizza.ProductName" />
                                 <input type="hidden" name="pizzaPrice" value="@pizza.Price" />
 
                                 <button type="submit" class="btn btn-success add-to-cart-btn">Add To Cart</button>

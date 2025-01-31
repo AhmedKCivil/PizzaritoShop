@@ -69,13 +69,13 @@
 
                 <div class="card-body text-center">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title">@pizza.PizzaName</h5>
+                        <h5 class="card-title">@pizza.ProductName</h5>
 
                         <!-- Form to submit the selected pizza -->
                         <form method="post" class="pizza-form">
                             <input type="hidden" name="pizzaId" value="@pizza.Id" /> 
                             <input type="hidden" name="imageTitle" value="@pizza.ImageTitle" />
-                            <input type="hidden" name="pizzaName" value="@pizza.PizzaName" />
+                            <input type="hidden" name="pizzaName" value="@pizza.ProductName" />
                             <input type="hidden" name="pizzaPrice" value="@pizza.Price" />
 
                             <button type="submit" class="btn btn-success add-to-cart-btn">Add To Cart</button> 
