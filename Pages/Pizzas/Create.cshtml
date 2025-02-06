@@ -3,31 +3,50 @@
 @{
 }
 
-<h4>Add New Pizza</h4>
+<h4>Add New Product</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="NewPizza.ProductName" class="control-label"></label>
-                <input asp-for="NewPizza.ProductName" class="form-control" />
-                <span asp-validation-for="NewPizza.ProductName" class="text-danger"></span>
+                <label asp-for="NewProduct.CategoryId" class="control-label"></label>
+                <select asp-for="NewProduct.CategoryId" class="form-control">
+                    <option value="">-- Select Category --</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Value">@category.Text</option>
+                    }
+                </select>
+
+                <span asp-validation-for="NewProduct.CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NewPizza.Price" class="control-label"></label>
-                <input asp-for="NewPizza.Price" class="form-control" />
-                <span asp-validation-for="NewPizza.Price" class="text-danger"></span>
+                <label asp-for="NewProduct.ProductName" class="control-label"></label>
+                <input asp-for="NewProduct.ProductName" class="form-control" />
+                <span asp-validation-for="NewProduct.ProductName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NewPizza.ImageTitle" class="control-label"></label>
-                <input asp-for="NewPizza.ImageTitle" class="form-control" />
-                <span asp-validation-for="NewPizza.ImageTitle" class="text-danger"></span>
+                <label asp-for="NewProduct.Description" class="control-label"></label>
+                <textarea asp-for="NewProduct.Description" class="form-control"></textarea>
+                <span asp-validation-for="NewProduct.Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NewProduct.Price" class="control-label"></label>
+                <input asp-for="NewProduct.Price" class="form-control" />
+                <span asp-validation-for="NewProduct.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewProduct.ImageTitle" class="control-label"></label>
+                <input asp-for="NewProduct.ImageTitle" class="form-control" />
+                <span asp-validation-for="NewProduct.ImageTitle" class="text-danger"></span>
             </div>
             <br />
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                @* <input type="submit" value="Create" class="btn btn-primary" /> *@
+                <button type="submit" class="btn btn-primary">Create</button>
             </div>
         </form>
     </div>

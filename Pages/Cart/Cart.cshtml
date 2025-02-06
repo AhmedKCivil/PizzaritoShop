@@ -23,12 +23,12 @@
                 @foreach (var item in Model.Cart)
                 {
                     <tr>
-                        <td>@item.PizzaName</td>
+                        <td>@item.ProductName</td>
                         <td>@item.Quantity</td>
-                        <td>@item.PizzaPrice.ToString("c")</td>
-                        <td>@((item.PizzaPrice * item.Quantity).ToString("c"))</td>
+                        <td>@item.ProductPrice.ToString("c")</td>
+                        <td>@((item.ProductPrice * item.Quantity).ToString("c"))</td>
                         <td>
-                            <form method="post" asp-page-handler="Remove" asp-route-pizzaId="@item.PizzaId">
+                            <form method="post" asp-page-handler="Remove" asp-route-pizzaId="@item.ProductId">
                                 <button type="submit" class="btn btn-danger">Remove</button>
                             </form>
                         </td>
@@ -38,10 +38,10 @@
         </table>
 
         <div class="text-right">
-            <h4>Total: @Model.Cart.Sum(i => i.PizzaPrice * i.Quantity).ToString("c")</h4>
+            <h4>Total: @Model.Cart.Sum(i => i.ProductPrice * i.Quantity).ToString("c")</h4>
 
             <a class="btn btn-success" asp-page="/Checkout/CustomerDetails"
-               asp-route-pizzaName="@Model.Cart.FirstOrDefault()?.PizzaName"
+               asp-route-pizzaName="@Model.Cart.FirstOrDefault()?.ProductName"
                asp-route-TotalPrice="@Model.TotalPrice">Proceed to Checkout</a>
 
         </div>
@@ -58,32 +58,32 @@
        <div class="container">
         <div class="row justify-content-center">
 
-    @foreach (var pizza in Model.myPizzas)
+    @foreach (var product in Model.myPizzas)
     {
-        var imagePath = pizza.ImageTitle;
+        var imagePath = product.ImageTitle;
 
         <div class="col-md-3 mb-3">
             <div class="card shadow-sm">
                 
-                <img src="@imagePath" class="card-img-top" alt="@pizza.ImageTitle" />
+                <img src="@imagePath" class="card-img-top" alt="@product.ImageTitle" />
 
                 <div class="card-body text-center">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title">@pizza.ProductName</h5>
+                    <h5 class="card-title">@product.ProductName</h5>
 
-                        <!-- Form to submit the selected pizza -->
+                        <!-- Form to submit the selected product -->
                         <form method="post" class="pizza-form">
-                            <input type="hidden" name="pizzaId" value="@pizza.Id" /> 
-                            <input type="hidden" name="imageTitle" value="@pizza.ImageTitle" />
-                            <input type="hidden" name="pizzaName" value="@pizza.ProductName" />
-                            <input type="hidden" name="pizzaPrice" value="@pizza.Price" />
+                            <input type="hidden" name="pizzaId" value="@product.Id" />
+                            <input type="hidden" name="imageTitle" value="@product.ImageTitle" />
+                            <input type="hidden" name="pizzaName" value="@product.ProductName" />
+                            <input type="hidden" name="pizzaPrice" value="@product.Price" />
 
                             <button type="submit" class="btn btn-success add-to-cart-btn">Add To Cart</button> 
 
                             <div class="notification" style="display: none;"></div>
                         </form>
                     </div>
-                    <p class="card-text">Price: £@pizza.Price</p>
+                    <p class="card-text">Price: £@product.Price</p>
                 </div>
             </div>
         </div>

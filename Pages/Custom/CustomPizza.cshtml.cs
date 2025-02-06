@@ -31,10 +31,10 @@ namespace PizzaritoShop.Pages.Forms
 
             var customPizzaCartItem = new CartItem
             {
-                PizzaId = CustomPizza.Id,
+                ProductId = CustomPizza.Id,
                 //PizzaName = "Custom Pizza",
-                PizzaName = string.IsNullOrEmpty(CustomPizza.PizzaName) ? "Custom Pizza" : CustomPizza.PizzaName, // Use user input or fallback to "Custom Pizza"
-                PizzaPrice = PizzaPrice,
+                ProductName = string.IsNullOrEmpty(CustomPizza.ProductName) ? "Custom Pizza" : CustomPizza.ProductName, // Use user input or fallback to "Custom Pizza"
+                ProductPrice = PizzaPrice,
                 Quantity = 1,
                 StuffedCrust = CustomPizza.StuffedCrust,
                 ThinCrispy = CustomPizza.ThinCrispy,
@@ -53,7 +53,7 @@ namespace PizzaritoShop.Pages.Forms
             //debugging purpose
             foreach (var item in cart)
             {
-                Console.WriteLine($"Pizza: {item.PizzaName}, StuffedCrust: {item.StuffedCrust}, ThinCrispy: {item.ThinCrispy}, Chicken: {item.Chicken}, Pepperoni: {item.Pepperoni}");
+                Console.WriteLine($"Pizza: {item.ProductName}, StuffedCrust: {item.StuffedCrust}, ThinCrispy: {item.ThinCrispy}, Chicken: {item.Chicken}, Pepperoni: {item.Pepperoni}");
             }
 
 

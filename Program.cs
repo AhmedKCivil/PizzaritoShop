@@ -1,8 +1,8 @@
 using PizzaritoShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using PizzaritoShop.Data.Services;
 using Core.Interfaces;
+using Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +19,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 
 // Register IHttpContextAccessor
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddScoped<IPizzasService, PizzasService>();
+builder.Services.AddScoped<IProductsService, ProductsService>();
 
 // Configure session with a 30-minute timeout
 builder.Services.AddSession(options =>

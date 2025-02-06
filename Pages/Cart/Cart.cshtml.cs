@@ -29,7 +29,7 @@ namespace PizzaritoShop.Pages.Cart
 
         public void OnGet()
         {
-            myPizzas = _context.Pizzas.OrderBy(p => Guid.NewGuid()).Take(3).ToList();
+            myPizzas = _context.Products.OrderBy(p => Guid.NewGuid()).Take(3).ToList();
 
             // Retrieve custom pizza from session
             var customPizza = HttpContext.Session.GetObject<CustomPizza>("CustomPizza");
@@ -41,15 +41,15 @@ namespace PizzaritoShop.Pages.Cart
             if (customPizza != null)
             {
                 // Check if the custom pizza is already in the cart
-                var existingItem = Cart.FirstOrDefault(c => c.PizzaName == customPizza.PizzaName);
+                var existingItem = Cart.FirstOrDefault(c => c.ProductName == customPizza.ProductName);
             
                 if (existingItem == null)
                 {
                     //add a new pizza to the cart
                     var cartItem = new CartItem
                     {
-                        PizzaName = customPizza.PizzaName,
-                        PizzaPrice = customPizza.TotalPrice,
+                        ProductName = customPizza.ProductName,
+                        ProductPrice = customPizza.TotalPrice,
                         Quantity = 1,
                     };
 
@@ -62,7 +62,7 @@ namespace PizzaritoShop.Pages.Cart
             
             HttpContext.Session.SetObject(CartSessionKey, Cart);
 
-            TotalPrice = Cart.Sum(item => item.PizzaPrice * item.Quantity);
+            TotalPrice = Cart.Sum(item => item.ProductPrice * item.Quantity);
 
         }
 
@@ -70,7 +70,7 @@ namespace PizzaritoShop.Pages.Cart
         {
             Cart = HttpContext.Session.GetObject<List<CartItem>>(CartSessionKey) ?? new List<CartItem>();
             
-            var item = Cart.FirstOrDefault(c => c.PizzaId == pizzaId);
+            var item = Cart.FirstOrDefault(c => c.ProductId == pizzaId);
 
             if (item != null)
             {
@@ -80,9 +80,9 @@ namespace PizzaritoShop.Pages.Cart
             else
             {
                 item = new CartItem { 
-                    PizzaId = pizzaId, 
-                    PizzaName = pizzaName, 
-                    PizzaPrice = pizzaPrice, 
+                    ProductId = pizzaId, 
+                    ProductName = pizzaName, 
+                    ProductPrice = pizzaPrice, 
                     Quantity = 1 };
 
                 Cart.Add(item);
@@ -92,7 +92,7 @@ namespace PizzaritoShop.Pages.Cart
 
             HttpContext.Session.SetObject(CartSessionKey, Cart);
 
-            TotalPrice = Cart.Sum(i => i.PizzaPrice * i.Quantity);
+            TotalPrice = Cart.Sum(i => i.ProductPrice * i.Quantity);
 
             return RedirectToPage("/Checkout/CustomerDetails", new
             {
@@ -105,7 +105,7 @@ namespace PizzaritoShop.Pages.Cart
              // Retrieve the cart from session
             Cart = HttpContext.Session.GetObject<List<CartItem>>(CartSessionKey) ?? new List<CartItem>();
 
-            var removeItem = Cart.FirstOrDefault(p => p.PizzaId == pizzaId);
+            var removeItem = Cart.FirstOrDefault(p => p.ProductId == pizzaId);
 
             if (removeItem != null)
             {
@@ -134,7 +134,7 @@ namespace PizzaritoShop.Pages.Cart
 
 
             // Recalculate the total price
-            TotalPrice = Cart.Sum(i => i.PizzaPrice * i.Quantity);
+            TotalPrice = Cart.Sum(i => i.ProductPrice * i.Quantity);
 
             return RedirectToPage("/Cart/Cart");
         }

@@ -2,15 +2,15 @@ using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using PizzaritoShop.Data.Services;
+
 
 namespace PizzaritoShop.Pages.Pizzas
 {
     public class DetailsModel : PageModel
     {
-        private readonly IPizzasService _pizzasService;
+        private readonly IProductsService _pizzasService;
 
-        public DetailsModel(IPizzasService pizzasService)
+        public DetailsModel(IProductsService pizzasService)
         {
             _pizzasService = pizzasService;
         }

@@ -30,22 +30,22 @@ namespace PizzaritoShop.Pages.Checkout
         public void OnGet()
         {
             CartItems = HttpContext.Session.GetObject<List<CartItem>>(CartSessionKey) ?? new List<CartItem>();
-            TotalPrice = CartItems.Sum(item => item.PizzaPrice * item.Quantity);
+            TotalPrice = CartItems.Sum(item => item.ProductPrice * item.Quantity);
 
             //debugging purpose code
             foreach (var item in CartItems)
             {
-                Console.WriteLine($"Pizza: {item.PizzaName}, StuffedCrust: {item.StuffedCrust}, ThinCrispy: {item.ThinCrispy}, Chicken: {item.Chicken}, Pepperoni: {item.Pepperoni}");
+                Console.WriteLine($"Pizza: {item.ProductName}, StuffedCrust: {item.StuffedCrust}, ThinCrispy: {item.ThinCrispy}, Chicken: {item.Chicken}, Pepperoni: {item.Pepperoni}");
             }
         }
 
         public async Task<IActionResult> OnPost()
         {
             CartItems = HttpContext.Session.GetObject<List<CartItem>>(CartSessionKey) ?? new List<CartItem>();
-            TotalPrice = CartItems.Sum(item => item.PizzaPrice * item.Quantity);
+            TotalPrice = CartItems.Sum(item => item.ProductPrice * item.Quantity);
 
             // Combine all the pizza names into a single string separated by commas.
-            var combinedPizzaNames = string.Join(", ", CartItems.Select(item => item.PizzaName));  // Combining pizza names
+            var combinedPizzaNames = string.Join(", ", CartItems.Select(item => item.ProductName));  // Combining pizza names
 
             var newOrder = new AllOrders
             {
@@ -54,7 +54,7 @@ namespace PizzaritoShop.Pages.Checkout
                 ProductName = combinedPizzaNames,
                 CartItems = CartItems,
                 Quantity = CartItems.Sum(item => item.Quantity),
-                TotalPrice = CartItems.Sum(item => item.PizzaPrice * item.Quantity),
+                TotalPrice = CartItems.Sum(item => item.ProductPrice * item.Quantity),
                 CreatedDate = DateTime.Now
             };
 

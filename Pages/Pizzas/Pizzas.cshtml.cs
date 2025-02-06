@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository.Helpers;
-using PizzaritoShop.Data.Services;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Entities.Core_Entities;
@@ -11,10 +10,10 @@ namespace PizzaritoShop.Pages.Pizzas
     public class PizzaModel : PageModel
     {
         private const string CartSessionKey = "Cart";
-        private readonly IPizzasService _pizzasService;
+        private readonly IProductsService _pizzasService;
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public PizzaModel(IPizzasService pizzasService, IHttpClientFactory httpClientFactory)
+        public PizzaModel(IProductsService pizzasService, IHttpClientFactory httpClientFactory)
         {
             _pizzasService = pizzasService;
             _httpClientFactory = httpClientFactory;
@@ -30,7 +29,7 @@ namespace PizzaritoShop.Pages.Pizzas
         {
 
             // Fetch pizzas using the PizzasService (API + Fallback to DB)
-            Pizzas = await _pizzasService.GetAllPizzasAsync("https://localhost:7030/api/Pizzas");
+            Pizzas = await _pizzasService.GetAllProductsAsync("https://localhost:7030/api/Pizzas");
 
             // Apply search filter if SearchQuery is provided
             if (!string.IsNullOrEmpty(SearchQuery))
